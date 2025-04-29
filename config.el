@@ -46,15 +46,20 @@
                              haskell-stack-compile-command))
 
 ;; LSP
-(setq lsp-ui-sideline-enable nil
-      lsp-ui-doc-enable nil
-      lsp-ui-doc-max-height 30
-      lsp-ui-doc-max-height 100
-      lsp-enable-file-watchers nil
-      lsp-haskell-plugin-stan-global-on nil
-      lsp-haskell-plugin-tactics-global-on nil
-      lsp-haskell-check-project nil
-      lsp-before-save-edits nil)
+(after! lsp-mode
+  (setq lsp-ui-sideline-enable nil
+        lsp-ui-doc-enable nil
+        lsp-ui-doc-max-height 30
+        lsp-ui-doc-max-height 100
+        lsp-enable-file-watchers nil
+        lsp-enable-semantic-highlighting nil
+        lsp-enable-semantic-tokens nil
+        lsp-semantic-tokens-enable nil
+        lsp-enable-symbol-highlighting nil
+        lsp-haskell-plugin-stan-global-on nil
+        lsp-haskell-plugin-tactics-global-on nil
+        lsp-haskell-check-project nil
+        lsp-before-save-edits nil))
 
 (setq +format-on-save-enabled-modes
       '(not emacs-lisp-mode

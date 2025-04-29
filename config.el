@@ -4,7 +4,7 @@
 
 (setq org-directory "~/org/")
 
-(setq doom-font "New Heterodox Mono A")
+(setq doom-font "New Heterodox Mono")
 
 (setq-default tab-width 4
               indent-tabs-mode nil
@@ -35,7 +35,7 @@
       lsp-haskell-diagnostics-on-change nil)
 
 (setq-hook! 'haskell-mode-hook
-  compile-command haskell-compile-cabal-build-command
+  compile-command haskell-stack-compile-command
   display-fill-column-indicator-column 100
   ormolu-process-path "fourmolu")
 

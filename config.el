@@ -108,7 +108,7 @@
 
 (set-eshell-alias! "shake" "stack exec shake --")
 
-(add-hook! rjsx-mode 'prettier-js-mode)
+;; (add-hook! rjsx-mode 'prettier-js-mode)
 
 (put 'haskell-hoogle-command 'safe-local-variable #'stringp)
 (put 'haskell-hoogle-server-command 'safe-local-variable (lambda (_) t))
@@ -118,3 +118,6 @@
 (after! ellama
   (setopt ellama-language "English"
           ellama-provider (make-llm-ollama :chat-model "codellama" :embedding-model "codellama")))
+
+(use-package! lsp-biome
+  :config (setq lsp-biome-format-on-save t))

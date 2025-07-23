@@ -122,15 +122,8 @@
   (require 'llm-ollama)
   (setopt ellama-provider
           (make-llm-ollama
-           :chat-model "deepcoder"
-           :embedding-model "deepcoder")))
-
-;; (after! ellama
-;;   (setopt ellama-language "English"
-;;           ellama-provider (make-llm-ollama :chat-model "codellama" :embedding-model "codellama")))
-
-
-
+           :chat-model "deepseek-r1"
+           :embedding-model "deepseek-r1")))
 
 (use-package! lsp-biome
   :config (setq lsp-biome-format-on-save t))

@@ -127,3 +127,43 @@
 
 (use-package! lsp-biome
   :config (setq lsp-biome-format-on-save t))
+
+(defun zz/file-exists-p (filepath)
+  "Determine if a given file exists returning the FILEPATH if it does."
+  (when (file-exists-p filepath)
+    filepath))
+
+(defun zz/is-haskell-package-p (dir)
+  "Determine if the given DIR is a haskell package directory.
+Returns the full path to the detected Haskell package file."
+  (let ((hs-files '("package.yaml" "*.cabal" "cabal.project" "stack.yaml")))
+    (-any (lambda (x)
+            (or (zz/file-exists-p (concat dir x))
+                (-any 'zz/file-exists-p (file-expand-wildcards (concat dir x)))))
+          hs-files)))
+
+(defun zz/is-package-dir (dir)
+  "Determine if the given DIR refers to a package.
+Returns the full path to the detected package file.
+Useful to use when `locate-dominating-file'."
+  ;; TODO Should be refactored so we have a mapping from 'major-mode -> package-file-list'
+  (cond ((derived-mode-p 'haskell-mode 'haskell-cabal-mode) (zz/is-haskell-package-p dir))
+        ((derived-mode-p 'clojure-mode) (zz/is-clojure-package-p dir))
+        (t (message (concat "Finding package for " (symbol-name major-mode) " is not supported!"))
+           nil)))
+
+(defun zz/projectile-package-dir ()
+  "Open closest package directory found upwards starting from `default-directory'."
+  (interactive)
+  (let ((package-dir (projectile-locate-dominating-file default-directory #'zz/is-package-dir)))
+    (when package-dir (dired package-dir))))
+
+(defun zz/projectile-package-file ()
+  "Open closest package file found upwards starting from `default-directory'."
+  (interactive)
+  (let ((package-dir (projectile-locate-dominating-file default-directory #'zz/is-package-dir)))
+    (when package-dir
+      (find-file (zz/is-package-dir package-dir)))))
+
+(after! projectile
+  (map! :localleader :desc "Package description file" :nv "," #'zz/projectile-package-file))

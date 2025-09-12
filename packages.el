@@ -7,7 +7,10 @@
 (package! ellama)
 (package! just-mode)
 (package! justl)
-(package! lsp-biome :recipe `(:host github :repo "cxa/lsp-biome"))
+(package! lsp-biome
+  :recipe `(:host github :repo "cxa/lsp-biome"))
+(package! claude-code-ide
+  :recipe `(:host github :repo "manzaltu/claude-code-ide.el"))
 
 (when (file-exists-p! "packages-local.el" doom-user-dir)
   (load! "packages-local.el" doom-user-dir))

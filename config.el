@@ -166,3 +166,8 @@ Useful to use when `locate-dominating-file'."
 
 (after! projectile
   (map! :localleader :desc "Package description file" :nv "," #'zz/projectile-package-file))
+
+(use-package! claude-code-ide
+  :bind ("C-c C-'" . claude-code-ide-menu) ; Set your favorite keybinding
+  :config
+  (claude-code-ide-emacs-tools-setup)) ; Optionally enable Emacs MCP tools

@@ -40,10 +40,29 @@
   ormolu-process-path "fourmolu")
 
 (add-hook! haskell-mode 'display-fill-column-indicator-mode)
-(add-hook! haskell-mode 'ormolu-format-on-save-mode)
+;; (add-hook! haskell-mode 'ormolu-format-on-save-mode)
 (add-hook! haskell-mode 'haskell-company-backends)
 (add-hook! haskell-mode (set (make-local-variable 'compile-command)
                              haskell-stack-compile-command))
+
+(after! lsp-haskell
+  (setq
+   lsp-haskell-server-path "haskell-language-server-wrapper"
+   ;;lsp-haskell-formatting-provider "none"
+   lsp-haskell-formatting-provider 'ormolu-format-buffer
+   lsp-haskell-tactic-on nil
+   lsp-haskell-check-project nil
+   lsp-haskell-plugin-stan-global-on nil
+   lsp-haskell-diagnostics-on-change nil))
+
+;; HELP
+;; (after! lsp-haskell
+;;   (remove-hook 'haskell-mode-hook #'lsp!))
+;; (after! haskell-mode
+;;   (remove-hook 'haskell-mode-hook #'interactive-haskell-mode))
+;;(after! haskell-mode
+;;   (remove-hook 'haskell-mode-local-vars-hook #'lsp!))
+
 
 ;; LSP
 (after! lsp-mode
@@ -140,6 +159,8 @@ Returns the full path to the detected Haskell package file."
             (or (zz/file-exists-p (concat dir x))
                 (-any 'zz/file-exists-p (file-expand-wildcards (concat dir x)))))
           hs-files)))
+
+
 
 (defun zz/is-package-dir (dir)
   "Determine if the given DIR refers to a package.

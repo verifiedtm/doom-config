@@ -1,8 +1,9 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; $DOOMDIR/packages.el
 
+;;(package! lsp-mode :pin "aa6c5f943c691952c78ad0ce659e4626ca942fdc")
 (package! rg)
-(package! ormolu)
+;;(package! ormolu)
 (package! persistent-soft)
 (package! ellama)
 (package! just-mode)

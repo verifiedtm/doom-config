@@ -195,3 +195,5 @@ Useful to use when `locate-dominating-file'."
 
 (after! rustic
   (setq rustic-lsp-check-command "clippy"))
+
+(use-package! vimrc-mode)

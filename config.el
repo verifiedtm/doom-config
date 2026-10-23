@@ -6,6 +6,8 @@
 
 (setq doom-font "New Heterodox Mono")
 
+(setq doom-theme 'doom-tokyo-night)
+
 (setq-default tab-width 4
               indent-tabs-mode nil
               fill-column 100

@@ -13,6 +13,8 @@
 (package! claude-code-ide
   :recipe `(:host github :repo "manzaltu/claude-code-ide.el"))
 (package! vimrc-mode)
+(package! heliograph
+  :recipe `(:host github :repo "verifiedtm/heliograph-el"))
 
 (when (file-exists-p! "packages-local.el" doom-user-dir)
   (load! "packages-local.el" doom-user-dir))

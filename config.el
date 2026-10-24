@@ -199,3 +199,25 @@ Useful to use when `locate-dominating-file'."
   (setq rustic-lsp-check-command "clippy"))
 
 (use-package! vimrc-mode)
+
+(use-package! heliograph
+  :demand t
+  :init
+  (setq initial-buffer-choice
+        (lambda ()
+          (let ((buffer (get-buffer-create "*heliograph*")))
+            (with-current-buffer buffer
+              (unless (derived-mode-p 'heliograph-mode)
+                (heliograph-mode))
+              (setq-local heliograph--renderer 'auto)
+              (heliograph--render)
+              (heliograph--start-timer))
+            buffer)))
+  :commands (heliograph)
+  :config
+  (setq heliograph-center-renderer #'heliograph-render-center-astrolabe
+        heliograph-location-provider 'geoclue
+        heliograph-geoclue-desktop-id "emacs"
+        ;; fallback when geoclue is unavailable
+        heliograph-latitude 40.7128
+        heliograph-longitude -74.006))

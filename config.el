@@ -215,9 +215,5 @@ Useful to use when `locate-dominating-file'."
             buffer)))
   :commands (heliograph)
   :config
-  (setq heliograph-center-renderer #'heliograph-render-center-astrolabe
-        heliograph-location-provider 'geoclue
-        heliograph-geoclue-desktop-id "emacs"
-        ;; fallback when geoclue is unavailable
-        heliograph-latitude 40.7128
+  (setq heliograph-latitude 40.7128
         heliograph-longitude -74.006))
